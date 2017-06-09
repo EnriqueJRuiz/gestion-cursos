@@ -6,6 +6,7 @@ import javax.sql.DataSource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcCall;
@@ -24,32 +25,34 @@ public class CursoDAOImp implements CursoDAO {
 	private static final Logger LOGGER = LoggerFactory.getLogger(CursoDAOImp.class);
 	
 	
+	@Autowired
 	@Override
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
 		this.template = new JdbcTemplate(dataSource);
 	}
 
+
 	@Override
 	public Curso create(Curso curso) {
 		
-		final String SQL = "INSERT INTO cursos(codCurso, nomCurso) VALUES (?,?)";
+		final String SQL = "INSERT INTO cursos(CodCurso, NomCurso) VALUES (?,?)";
 		this.template.update(SQL,curso.getCodCursos(),curso.getNomCursos());
 		return curso;
 	}
 
 	@Override
 	public Curso update(Curso curso) {
-		final String SQL="UPDATE  cursos SET codCurso = ? , nomCurso = ?  WHERE codCurso = ? ";
-		this.template.update(SQL,curso.getCodCursos(),curso.getNomCursos(),curso.getCodCursos());
+		final String SQL="UPDATE  cursos SET CodCurso = ? , NomCurso = ?  WHERE IdProxCurso = ? ";
+		this.template.update(SQL,curso.getCodCursos(),curso.getNomCursos(),curso.getIdProxCurso());
 		return curso;
 	}
 
 	@Override
-	public Curso getById(String codCurso) {
+	public Curso getById(int idProxCurso) {
 		Curso curso = null;
 		try{
-			curso = this.template.queryForObject( "SELECT codCurso, nomCurso FROM cursos WHERE codCurso = ?", new Object[] { codCurso }, new CursoMapper());
+			curso = this.template.queryForObject( "SELECT IdProxCurso, CodCurso, NomCurso FROM cursos WHERE IdProxCurso = ?", new Object[] { idProxCurso }, new CursoMapper());
 		}catch(EmptyResultDataAccessException e){
 			LOGGER.trace(e.getMessage());	
 		}
@@ -60,7 +63,7 @@ public class CursoDAOImp implements CursoDAO {
 	public List<Curso> getAll() {
 		List<Curso> cursos = null;
 		try{
-			cursos=this.template.query( "SELECT codCurso, nomCurso FROM cursos", new CursoMapper());
+			cursos=this.template.query( "SELECT IdProxCurso, CodCurso, NomCurso FROM cursos", new CursoMapper());
 		}catch(EmptyResultDataAccessException e){
 			LOGGER.trace(e.getMessage());	
 		}
@@ -68,8 +71,19 @@ public class CursoDAOImp implements CursoDAO {
 	}
 
 	@Override
-	public void delete(String codCurso) {
-		this.template.update("delete from actor where id = ?",String.valueOf(codCurso));
+	public List<Curso> getBy10() {
+		List<Curso> cursos = null;
+		try{
+			cursos=this.template.query( "SELECT IdProxCurso, CodCurso, NomCurso FROM cursos ORDER BY IdProxCurso DESC LIMIT 10", new CursoMapper());
+		}catch(EmptyResultDataAccessException e){
+			LOGGER.trace(e.getMessage());	
+		}
+		return cursos;
+	}
+	
+	@Override
+	public void delete(int idProxCurso) {
+		this.template.update("delete FROM cursos WHERE IdProxCurso = ?", new Object[] {idProxCurso});
 		
 	}
 

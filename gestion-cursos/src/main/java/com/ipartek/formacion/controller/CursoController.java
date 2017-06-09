@@ -1,16 +1,12 @@
 package com.ipartek.formacion.controller;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 import java.util.Locale;
 
-import javax.annotation.Resource;
 import javax.servlet.ServletContext;
 import javax.validation.Valid;
 
-import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,19 +58,19 @@ public class CursoController {
 	}
 	
 	@RequestMapping(value="/{id}")
-	public ModelAndView getById(@PathVariable("id") String id){
+	public ModelAndView getById(@PathVariable("id") int id){
 		mav= new ModelAndView("curso");
 		mav.addObject("curso",cS.getById(id));
 		LOGGER.trace("realiza getById de cursos");
 		return mav;
 	}
 	
-	@RequestMapping(value="/deleteColor/{id}", method = RequestMethod.GET)
-	public ModelAndView deleteCurso(@PathVariable("id") String id, RedirectAttributes redirectMap){
+	@RequestMapping(value="/deleteCurso/{id}", method = RequestMethod.GET)
+	public ModelAndView deleteCurso(@PathVariable("id") int id, RedirectAttributes redirectMap){
 		String destino = "";
 		String txt="";
 		Mensaje mensaje = null;
-		LOGGER.info(id);
+		Integer.toString(id);
 		
 		destino = "redirect:/cursos";
 		mav= new ModelAndView(destino);
@@ -113,7 +109,7 @@ public class CursoController {
 			mensaje = new Mensaje(MensajeType.MSG_TYPE_DANGER);
 		}else{
 			destino = "redirect:/cursos";
-			if(cS.getById(curso.getCodCursos()) != null){
+			if(cS.getById(curso.getIdProxCurso()) != null){
 				try {
 					LOGGER.info(curso.toString());
 					cS.update(curso);

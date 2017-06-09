@@ -25,18 +25,23 @@ public class CursoServiceImp implements CursoService {
 	}
 
 	@Override
-	public Curso getById(String codCurso) {
-		return cursoDAO.getById(codCurso);
+	public Curso getById(int idProxCurso) {
+		return cursoDAO.getById(idProxCurso);
 	}
 
 	@Override
 	public List<Curso> getAll() {
 		return cursoDAO.getAll();
 	}
+	
+	@Override
+	public List<Curso> getBy10() {
+		return cursoDAO.getBy10();
+	}
 
 	@Override
-	public void delete(String codCurso) {
-		cursoDAO.delete(codCurso);
+	public void delete(int idProxCurso) {
+		cursoDAO.delete(idProxCurso);
 
 	}
 

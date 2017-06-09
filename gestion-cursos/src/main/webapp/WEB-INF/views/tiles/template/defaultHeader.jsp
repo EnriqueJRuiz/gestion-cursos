@@ -3,6 +3,49 @@
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
 
 <div class="row">
+
+	<nav class="navbar navbar-inverse" role="navigation" >
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+				<span class="sr-only">Desplegar navegación</span>
+			    <span class="icon-bar"></span>
+			    <span class="icon-bar"></span>
+			    <span class="icon-bar"></span>
+			</button>
+		    <a class="navbar-brand" href="/gestioncursos">Gestion Cursos</a>
+		</div>
+		    <div class="collapse navbar-collapse navbar-ex1-collapse">
+				<ul class="nav navbar-nav">
+				    <li><a href="<c:url value='/cursos'/>">Cursos</a></li>
+			    </ul>
+			    <ul class="nav navbar-nav navbar-right  btn-group">
+			    	<li>
+				 		<sec:authorize access="isAnonymous()">
+			                <form method="POST" action="<c:url value='/login'/>" role="form"  class="navbar-form navbar-right">
+			                    <div class="input-group">
+									<label for="userId"><span class="input-group-addon label-info"><i class="glyphicon glyphicon-user"></i></span></label>
+									<input name="userId" id="userId" type="text" value="${SPRING_SECURITY_LAST_USERNAME}"/> 
+			                   </div>
+			                    <div class="input-group">
+									<label for="password"><span class="input-group-addon label-info"><i class="glyphicon glyphicon-lock "></i></span></label>
+									<input name="password" id="password" type="password"/>
+			                   </div>					                    
+			                    <input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}" />
+			              		<div class="form-group ">
+			                    	<input type="submit" value="Login" class="btn btn-info"/>
+			                    </div>
+			                </form>
+			            </sec:authorize>
+			            <sec:authorize access="isAuthenticated()">
+			            	<div class="form-group navbar-form navbar-right">
+			                	<a href="<c:url value="/logout" />" class="btn btn-info" type="button" >Logout</a>
+			            	</div>
+			            </sec:authorize>
+				 	</li>
+ 				</ul>
+		    </div>
+		</nav>
+	 </div>
 	<h1 class="text-center">CURSOS</h1>
  </div>
 		

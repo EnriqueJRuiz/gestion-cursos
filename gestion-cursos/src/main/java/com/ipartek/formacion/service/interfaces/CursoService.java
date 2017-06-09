@@ -11,10 +11,14 @@ public interface CursoService {
 	
 	public Curso update(Curso curso);
 	
-	public Curso getById(String codCurso);
+	public Curso getById(int idProxCurso);
 	
 	public List<Curso>  getAll();
 	
-	public void delete(String codCurso);
+	public List<Curso> getBy10();
+	
+	public void delete(int idProxCurso);
+
+	
 
 }

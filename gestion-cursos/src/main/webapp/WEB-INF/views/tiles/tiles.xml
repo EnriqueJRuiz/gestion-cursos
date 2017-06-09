@@ -18,15 +18,25 @@
        <put-attribute name="body" value="/WEB-INF/views/pages/home.jsp" />  
    </definition>  
    
-   <!-- Color Pages -->
    
-   <definition name="colores" extends="my-template">  
-       <put-attribute name="title" value="listado colores" />  
-       <put-attribute name="body" value="/WEB-INF/views/pages/colores/colores.jsp" />  
+    <!-- login Page -->
+   <definition name="login" extends="my-template">  
+       <put-attribute name="title" value="login" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/login.jsp" />  
+   </definition>  
+   
+   
+   <!-- Curso Pages -->
+   
+   <definition name="cursos" extends="my-template">   
+       <put-attribute name="body" value="/WEB-INF/views/pages/cursos/cursos.jsp" />  
    </definition>  
   
-     <definition name="color" extends="my-template">  
-       <put-attribute name="title" value="formulario color" />  
-       <put-attribute name="body" value="/WEB-INF/views/pages/colores/color.jsp" />  
+     <definition name="curso" extends="my-template">  
+       <put-attribute name="title" value="formulario curso" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/cursos/curso.jsp" />  
    </definition>  
+   
+   
+   
 </tiles-definitions>
