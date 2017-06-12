@@ -126,11 +126,11 @@
              <artifactId>jackson-databind</artifactId>
              <version>${jackson.library}</version>
          </dependency>
-         <!-- <dependency>
+         <dependency>
              <groupId>com.fasterxml.jackson.dataformat</groupId>
              <artifactId>jackson-dataformat-xml</artifactId>
             <version>${jackson.library}</version>
-         </dependency> -->       
+         </dependency>      
 		<!-- @Inject -->
 		<dependency>
 			<groupId>javax.inject</groupId>

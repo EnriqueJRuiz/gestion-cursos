@@ -2,9 +2,7 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
 
-<div class="row">
-
-	<nav class="navbar navbar-inverse" role="navigation" >
+	<nav class="navbar navbar-custom" role="navigation" >
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
 				<span class="sr-only">Desplegar navegación</span>
@@ -23,12 +21,10 @@
 				 		<sec:authorize access="isAnonymous()">
 			                <form method="POST" action="<c:url value='/login'/>" role="form"  class="navbar-form navbar-right">
 			                    <div class="input-group">
-									<label for="userId"><span class="input-group-addon label-info"><i class="glyphicon glyphicon-user"></i></span></label>
-									<input name="userId" id="userId" type="text" value="${SPRING_SECURITY_LAST_USERNAME}"/> 
+									<input name="userId" id="userId" type="text" placeholder="Username" value="${SPRING_SECURITY_LAST_USERNAME}"/> 
 			                   </div>
 			                    <div class="input-group">
-									<label for="password"><span class="input-group-addon label-info"><i class="glyphicon glyphicon-lock "></i></span></label>
-									<input name="password" id="password" type="password"/>
+									<input name="password" id="password" placeholder="Password" type="password"/>
 			                   </div>					                    
 			                    <input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}" />
 			              		<div class="form-group ">
@@ -45,7 +41,7 @@
  				</ul>
 		    </div>
 		</nav>
-	 </div>
+
 	<h1 class="text-center">CURSOS</h1>
- </div>
+
 		

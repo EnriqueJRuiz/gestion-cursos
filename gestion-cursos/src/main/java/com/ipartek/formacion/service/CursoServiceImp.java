@@ -45,4 +45,9 @@ public class CursoServiceImp implements CursoService {
 
 	}
 
+	@Override
+	public List<Curso> getBuscador(String search) {
+		return cursoDAO.getBuscador(search);
+	}
+
 }

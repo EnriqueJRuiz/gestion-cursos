@@ -18,7 +18,7 @@ public interface CursoDAO extends DAOSetter{
 
 	public void delete(int idProxCurso);
 
-	
+	public List<Curso> getBuscador(String search);
 
 	
 

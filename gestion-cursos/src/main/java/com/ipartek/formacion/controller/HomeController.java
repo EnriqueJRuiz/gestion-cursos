@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,10 +19,13 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ipartek.formacion.dbms.mapper.CursoMapper;
 import com.ipartek.formacion.dbms.persistence.Curso;
 import com.ipartek.formacion.service.interfaces.CursoService;
 
@@ -97,6 +101,19 @@ public class HomeController {
 			return "redirect:/login.html?logout";//se recomienda que la web logout sea la de login
 			
 		}
+		
+		@ResponseBody
+		@RequestMapping(value = "/search")
+		public List<Curso> getSearch(@RequestBody String search) {
+
+			List<Curso> result = null;
+			
+			result = cS.getBuscador(search);
+			
+			return result;
+
+		}
+
 
 	}
 

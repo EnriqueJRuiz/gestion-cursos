@@ -87,4 +87,20 @@ public class CursoDAOImp implements CursoDAO {
 		
 	}
 
+
+	@Override
+	public List<Curso> getBuscador(String search) {
+		List<Curso> result = null;
+		try{
+			result=this.template.query( "SELECT IdProxCurso, CodCurso, NomCurso FROM cursos WHERE NomCurso LIKE '%"+search+"%' ORDER BY IdProxCurso DESC LIMIT 10 ", new CursoMapper());
+		}catch(EmptyResultDataAccessException e){
+			LOGGER.trace(e.getMessage());	
+		}
+		return result;
+
+	}
+	
+	
+
+
 }
