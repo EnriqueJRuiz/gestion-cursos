@@ -104,7 +104,7 @@ public class HomeController {
 		
 		@ResponseBody
 		@RequestMapping(value = "/search")
-		public List<Curso> getSearch(@RequestBody String search) {
+		public List<Curso> getSearch(@RequestBody(required=false)  String search ) {
 
 			List<Curso> result = null;
 			

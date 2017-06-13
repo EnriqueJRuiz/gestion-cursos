@@ -2,21 +2,19 @@ jQuery(document).ready(function($) {
 	$("#search-form").click(function(event) {
 		event.preventDefault();
 		
-		console.log("primer paso");
+		//console.log("primer paso");
 		
-		var text = searchAjax();
+		searchAjax();
 		
-		console.log("text");
+		
 		
 		
 	});
 });
 
 function searchAjax() {
-	console.log("segundo paso");
 	var txt = "";
 	var data = $("#buscar").val();
-	return new Promise(function(resolve, reject){
 		$.ajax({
 			url : "http://localhost:8080/gestioncursos/search",
 			type : "POST",
@@ -24,43 +22,43 @@ function searchAjax() {
 			data : data,
 			dataType : 'json'
 		}).done(function(data){
-			$('tbody').remove();
+			$('tbody tr').remove();
 			if (data.length > 0) {
-			console.log(data);
+		
 				for (var i = 0; i < data.length; i++) {
 	                let curso = data[i];
-	                console.log(curso);
-	                txt += parseCurso(curso);
+	                
+	                txt += parseCurso($.parseJSON(JSON.stringify(curso)));
+	                
 	            }
 			}else{
-                txt ="no se encuentran ampliaciones en la BBDD";
+                txt ="no se encuentran cursos con esa busqueda";
             }
-            resolve(txt)
-        }, function(error) {//error
-            console.log(error);
-            txt ="error en la carga de ampliaciones";
-            reject(txt);
+			
+        }).fail(function() {//error
+            txt ="error en la carga de cursos";
+        })
+        .always(function() {
+        	pintar(txt);
         });
 		
-	});
+		
 	
 }
+function pintar(txt){
+	console.log(txt);
+	$('tbody').html(txt);
+}
+
 function parseCurso(curso){
-    let htmlEdit = "<button  type='button' class='btn btn-primary' name='editar' data-whatever='Editar'>Editar</button>";
-    let htmlDelete = "<button >Borrar</button>";
     let texto = "<tr>" +
         "<td>" +
-        curso.NomCurso +
+        curso.codCursos +
         "</td>" +
         "<td>" +
-        curso.CodCurso +
-        "</td>" +
-        "<td>" +
-        htmlEdit +
-        htmlDelete +
+        curso.nomCursos +
         "</td>" +
         "</tr>";
-    console.log(texto);
     return texto;
 }
 

@@ -21,7 +21,7 @@
 				</tr>
 			</thead>
 			<tfoot></tfoot>
-			<tbody>
+			<tbody id="tbody">
 				<c:choose>
 				 	<c:when test="${not empty listadocursos}">	<!-- cartaController -->
 				 		<c:forEach var="curso" items="${listadocursos}">
