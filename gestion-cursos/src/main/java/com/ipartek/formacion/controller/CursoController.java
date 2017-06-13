@@ -1,6 +1,9 @@
 package com.ipartek.formacion.controller;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -96,6 +99,8 @@ public class CursoController {
 		return mav;
 	}
 	
+	
+	
 	@RequestMapping(value="/save", method = RequestMethod.POST)
 	public String saveCurso(@ModelAttribute("curso")@Valid Curso curso,BindingResult bindingResult, ModelMap model,
 			RedirectAttributes redirectMap) throws IOException {
@@ -136,5 +141,50 @@ public class CursoController {
 			redirectMap.addFlashAttribute("mensaje", mensaje);
 		}
 		return destino;	
-	}	
+	}
+	
+	
+	@RequestMapping(value="/cargarCSV", method = RequestMethod.GET)
+	public ModelAndView cargarCSV() throws IOException{
+		
+		final String SEPARATOR=";";
+		
+		BufferedReader br = null;
+	      
+	      try {
+	         
+	         br = new BufferedReader(new FileReader("files/cursos.csv"));
+	         String line = br.readLine();
+	         while (null!=line) {
+	            String [] fields = line.split(SEPARATOR);
+	            System.out.println(Arrays.toString(fields));
+	            
+	            fields = removeTrailingQuotes(fields);
+	            System.out.println(Arrays.toString(fields));
+	            
+	            line = br.readLine();
+	         }
+	         
+	      } catch (Exception e) {
+	         
+	      } finally {
+	         if (null!=br) {
+	            br.close();
+	         }
+	      }
+	 
+		mav= new ModelAndView("redirect:/cursos");
+		return mav;
+	}
+	 private static String[] removeTrailingQuotes(String[] fields) {
+		 
+			final String QUOTE="\"";
+	      String result[] = new String[fields.length];
+
+	      for (int i=0;i<result.length;i++){
+	         result[i] = fields[i].replaceAll("^"+QUOTE, "").replaceAll(QUOTE+"$", "");
+	      }
+	      return result;
+	   }
+	
 }

@@ -1,16 +1,17 @@
 jQuery(document).ready(function($) {
 	$("#search-form").click(function(event) {
 		event.preventDefault();
-		
-		//console.log("primer paso");
-		
 		searchAjax();
-		
-		
-		
-		
 	});
+	$("#buscar").keyup(function(event) {
+		searchAjax();
+	});
+	
+	
 });
+
+
+
 
 function searchAjax() {
 	var txt = "";

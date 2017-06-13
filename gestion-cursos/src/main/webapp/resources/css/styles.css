@@ -211,26 +211,6 @@ main{
 background-color: #e6e6e6;
 }
 
-.img-color{
-	width: 15%;
-    height: auto;
-}
-.img-colores{
-	width: 20%;
-    height: auto;
-}
-.img-colorCarta{
-	width: 10%;
-    height: auto;
-}
-.img-ampliacion{
-	width: 350px;
-    height: auto;
-}
-.img-ampli-list{
-	width: 130px;
-    height: auto;
-}
 .btn-group{
 	margin-right: 0;
 }

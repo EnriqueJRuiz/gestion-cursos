@@ -12,7 +12,7 @@
     <http auto-config="true">
         <intercept-url pattern="/" access="permitAll" />
         <intercept-url pattern="/login.html" access="permitAll" />
-        <intercept-url pattern="/colores*" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/cursos*" access="hasRole('ROLE_ADMIN')" />
          <form-login  login-page="/login.html"
              username-parameter="userId"
              password-parameter="password"

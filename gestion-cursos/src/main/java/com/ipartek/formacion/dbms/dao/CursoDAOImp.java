@@ -96,7 +96,7 @@ public class CursoDAOImp implements CursoDAO {
 		SQL.append("SELECT IdProxCurso, CodCurso, NomCurso FROM cursos ");
 		
 		if(search != null && !search.isEmpty()){
-			SQL.append("WHERE NomCurso LIKE '%"+search+"%' ");
+			SQL.append("WHERE CONCAT(CodCurso, ' ', NomCurso) LIKE '%"+search+"%' ");
 		}
 		SQL.append("ORDER BY IdProxCurso DESC LIMIT 10 ");
 		try{
