@@ -1,5 +1,6 @@
 package com.ipartek.formacion.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,12 @@ public class CursoServiceImp implements CursoService {
 	@Override
 	public List<Curso> getBuscador(String search) {
 		return cursoDAO.getBuscador(search);
+	}
+
+	@Override
+	public void cargarCSV(ArrayList<Curso> cursos) {
+		cursoDAO.cargarCSV(cursos);
+		
 	}
 
 }

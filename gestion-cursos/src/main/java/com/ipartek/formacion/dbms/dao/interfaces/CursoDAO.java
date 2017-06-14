@@ -1,5 +1,6 @@
 package com.ipartek.formacion.dbms.dao.interfaces;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.ipartek.formacion.dbms.persistence.Curso;
@@ -19,6 +20,8 @@ public interface CursoDAO extends DAOSetter{
 	public void delete(int idProxCurso);
 
 	public List<Curso> getBuscador(String search);
+
+	public void cargarCSV(ArrayList<Curso> cursos);
 
 	
 

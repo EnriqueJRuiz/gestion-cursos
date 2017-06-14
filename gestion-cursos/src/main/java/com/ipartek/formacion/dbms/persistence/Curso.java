@@ -16,6 +16,13 @@ public class Curso implements Serializable, Comparable<Curso>{
 	
 	
 
+	public Curso(int idProxCurso, String codCursos, String nomCursos) {
+		super();
+		this.idProxCurso = idProxCurso;
+		this.codCursos = codCursos;
+		this.nomCursos = nomCursos;
+	}
+
 	public Curso() {
 		super();
 		this.idProxCurso = CODIGO_NULO;

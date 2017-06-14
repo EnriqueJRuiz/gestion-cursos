@@ -3,6 +3,7 @@ package com.ipartek.formacion.controller;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
@@ -153,20 +154,26 @@ public class CursoController {
 	      
 	      try {
 	         
-	         br = new BufferedReader(new FileReader("files/cursos.csv"));
-	         String line = br.readLine();
-	         while (null!=line) {
-	            String [] fields = line.split(SEPARATOR);
-	            System.out.println(Arrays.toString(fields));
-	            
+	    	  br = new BufferedReader(new FileReader("C:\\Desarrollo\\git\\gestion-cursos\\gestion-cursos\\src\\main\\resources\\files\\cursos.csv"));
+	         String line = null;
+	    	  ArrayList<Curso> cursos = new ArrayList<Curso>();
+	    	  while ((line = br.readLine())!=null) {
+	    	     String [] fields = line.split(SEPARATOR);
+	    	    
 	            fields = removeTrailingQuotes(fields);
-	            System.out.println(Arrays.toString(fields));
-	            
+	            if(!fields[8].isEmpty()){
+		            //LOGGER.info("valores "+ fields[0].toString()+" "+fields[8].toString()+" "+fields[1].toString() );
+		            if(isNumeric(fields[0].toString())){
+		            	Curso curso = new Curso(Integer.parseInt(fields[0].toString()) ,  fields[8].toString(),  fields[1].toString() );
+		            	cursos.add(curso);
+		            }
+	            }
 	            line = br.readLine();
+	            cS.cargarCSV(cursos);
 	         }
 	         
 	      } catch (Exception e) {
-	         
+	         e.printStackTrace();
 	      } finally {
 	         if (null!=br) {
 	            br.close();
@@ -186,5 +193,7 @@ public class CursoController {
 	      }
 	      return result;
 	   }
-	
+	 public static boolean isNumeric(String str) {
+	        return (str.matches("[+-]?\\d*(\\.\\d+)?") && str.equals("")==false);
+	    }
 }
