@@ -159,9 +159,8 @@ public class CursoController {
 	    	  ArrayList<Curso> cursos = new ArrayList<Curso>();
 	    	  while ((line = br.readLine())!=null) {
 	    	     String [] fields = line.split(SEPARATOR);
-	    	    
 	            fields = removeTrailingQuotes(fields);
-	            if(!fields[8].isEmpty()){
+	            if(fields.length>8 && !fields[8].isEmpty() && fields[8] != null){
 		            //LOGGER.info("valores "+ fields[0].toString()+" "+fields[8].toString()+" "+fields[1].toString() );
 		            if(isNumeric(fields[0].toString())){
 		            	Curso curso = new Curso(Integer.parseInt(fields[0].toString()) ,  fields[8].toString(),  fields[1].toString() );
@@ -169,9 +168,14 @@ public class CursoController {
 		            }
 	            }
 	            line = br.readLine();
-	            cS.cargarCSV(cursos);
+	            
+	            
 	         }
-	         
+	    	  try{
+		    	  cS.cargarCSV(cursos);
+		      } catch (Exception e) {
+		         e.printStackTrace();
+		      }
 	      } catch (Exception e) {
 	         e.printStackTrace();
 	      } finally {

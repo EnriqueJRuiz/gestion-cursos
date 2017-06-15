@@ -1,13 +1,7 @@
 jQuery(document).ready(function($) {
-	$("#search-form").click(function(event) {
-		event.preventDefault();
-		searchAjax();
-	});
 	$("#buscar").keyup(function(event) {
 		searchAjax();
 	});
-	
-	
 });
 
 
@@ -33,7 +27,7 @@ function searchAjax() {
 	                
 	            }
 			}else{
-                txt ="no se encuentran cursos con esa busqueda";
+                txt ="<tr><td colspan='2'>No se han encontrado Cursos en la Base de Datos</td></tr>";
             }
 			
         }).fail(function() {//error

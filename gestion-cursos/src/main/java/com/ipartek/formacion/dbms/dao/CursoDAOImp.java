@@ -113,7 +113,15 @@ public class CursoDAOImp implements CursoDAO {
 
 	@Override
 	public void cargarCSV(ArrayList<Curso> cursos) {
-		
+		this.template.update("TRUNCATE TABLE cursos");
+		for(Curso curso: cursos ){
+			
+			LOGGER.info("Nombre: "+ curso.getNomCursos());
+			LOGGER.info("Codigo "+ curso.getCodCursos());
+			LOGGER.info("ID "+ curso.getIdProxCurso());
+			final String SQL = "INSERT INTO cursos(CodCurso, NomCurso) VALUES (?,?)";
+			this.template.update(SQL,curso.getCodCursos(),curso.getNomCursos());
+		}
 		
 		
 	}
